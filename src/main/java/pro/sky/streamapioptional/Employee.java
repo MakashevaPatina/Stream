@@ -36,15 +36,27 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
-        this.salary = salary;
+        if (salary > 0) {
+            this.salary = salary;
+        } else {
+            System.out.println("Ошибка");
+        }
     }
 
     public int getDepartment() {
         return department;
     }
 
-    public void setDepartment(int department) {
-        this.department = department;
+    public void setDepartments(int department) {
+        if (department >= 1 && department <= 5) {
+            this.department = department;
+        } else {
+            System.out.println("Ошибка");
+        }
+    }
+
+    public boolean isInDepartment(int department) {
+        return this.department == department;
     }
 
     public String getFullname() {
