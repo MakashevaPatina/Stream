@@ -1,9 +1,11 @@
 package pro.sky.streamapioptional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.streamapioptional.exception.EmployeeAlreadyAddedException;
 import pro.sky.streamapioptional.exception.EmployeeNotFoundException;
 import pro.sky.streamapioptional.exception.EmployeeStorageFullException;
+import pro.sky.streamapioptional.exception.InvalidEmployeeDataException;
 
 import java.util.*;
 
@@ -25,6 +27,7 @@ public class EmployeeService {
     }
 
     public void addEmployee(Employee employee) throws EmployeeStorageFullException {
+        validateEmployeeData(employee.getFirstName(), employee.getLastName());
         if (employees.size() >= maxEmployees) {
             throw new EmployeeStorageFullException("Превышен лимит количества сотрудников.");
         }
@@ -34,12 +37,15 @@ public class EmployeeService {
         employees.put(employee.getFullname(), employee);
     }
 
-    public void removeEmployee(String firstName, String lastName) {
-        Employee employee = findEmployee(firstName, lastName);
+    public Employee removeEmployee(String firstName, String lastName) {
+        validateEmployeeData(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, 0, 0);
         employees.remove(employee.getFullname(), employee);
+        return employee;
     }
 
     public Employee findEmployee(String firstName, String lastName) {
+        validateEmployeeData(firstName, lastName);
         Employee employee = new Employee(firstName, lastName, 0, 0);
         if (employees.containsKey(employee.getFullname())) {
             return employees.get(employee.getFullname());
@@ -49,5 +55,11 @@ public class EmployeeService {
 
     public Map<String, Employee> getAllEmployees() {
         return new HashMap<>(employees);
+    }
+
+    private void validateEmployeeData(String firstName, String lastName) {
+        if (StringUtils.isBlank(firstName) || StringUtils.isBlank(lastName)) {
+            throw new InvalidEmployeeDataException("Имя и фамилия сотрудника не должны быть пустыми или содержать только пробелы.");
+        }
     }
 }
