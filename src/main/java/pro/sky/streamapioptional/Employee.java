@@ -1,5 +1,7 @@
 package pro.sky.streamapioptional;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -9,8 +11,8 @@ public class Employee {
     private int department;
 
     public Employee(String firstName, String lastName, double salary, int department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase());
         this.salary = salary;
         this.department = department;
     }
@@ -43,8 +45,12 @@ public class Employee {
         return department;
     }
 
-    public void setDepartment(int department) {
+    public void setDepartments(int department) {
         this.department = department;
+    }
+
+    public boolean isInDepartment(int department) {
+        return this.department == department;
     }
 
     public String getFullname() {
