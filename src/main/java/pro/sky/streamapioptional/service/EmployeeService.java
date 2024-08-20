@@ -1,7 +1,8 @@
-package pro.sky.streamapioptional;
+package pro.sky.streamapioptional.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import pro.sky.streamapioptional.Employee;
 import pro.sky.streamapioptional.exception.EmployeeAlreadyAddedException;
 import pro.sky.streamapioptional.exception.EmployeeNotFoundException;
 import pro.sky.streamapioptional.exception.EmployeeStorageFullException;
@@ -23,7 +24,7 @@ public class EmployeeService {
         addEmployee(new Employee("Margaret", "Atwood", 178000, 1));
         addEmployee(new Employee("Harper", "Lee", 199000, 2));
         addEmployee(new Employee("Haruki", "Murakami", 122000, 3));
-        addEmployee(new Employee("Franz", "Kafka", 111000, 4));
+        addEmployee(new Employee("Franz", "Kafka", 111, 4));
     }
 
     public void addEmployee(Employee employee) throws EmployeeStorageFullException {

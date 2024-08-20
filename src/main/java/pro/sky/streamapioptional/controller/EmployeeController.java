@@ -1,6 +1,8 @@
-package pro.sky.streamapioptional;
+package pro.sky.streamapioptional.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pro.sky.streamapioptional.Employee;
+import pro.sky.streamapioptional.service.EmployeeService;
 import pro.sky.streamapioptional.exception.EmployeeStorageFullException;
 
 import java.util.Map;
